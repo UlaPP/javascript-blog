@@ -7,10 +7,22 @@
     console.log('Link was clicked!');
   
     /* remove class 'active' from all article links  */
+    const activeLinks = document.querySelectorAll('.titles a.active');
+
+for(let activeLink of activeLinks){
+  activeLink.classList.remove('active');
+}
+
   
     /* add class 'active' to the clicked link */
   
     /* remove class 'active' from all articles */
+    const activeArticles = document.querySelectorAll('article a.active');
+
+for(let activeArticles of activeArticles){
+  activeArticles.classList.remove('active');
+}
+
   
     /* get 'href' attribute from the clicked link */
   
