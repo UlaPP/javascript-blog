@@ -18,13 +18,19 @@ for(let activeLink of activeLinks){
 
   
     /*[IN PROGRESS] add class 'active' to the clicked link */
+  
+
     console.log('clickedElement:', clickedElement);
+    const clickedElementActive = function(this){
+      clickedElement.classList.add('active');
+    }
+
   
     /* [DONE]remove class 'active' from all articles */
     const activeArticles = document.querySelectorAll('.posts .post');
 
-for(let activeArticles of activeArticles){
-  activeArticles.classList.remove('active');
+for(let activeArticle of activeArticles){
+  activeArticle.classList.remove('active');
 }
 
   
