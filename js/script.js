@@ -35,12 +35,12 @@ const titleClickHandler = function(event){
   console.log (articleSelector);
 
     /* find the correct article using the selector (value of 'href' attribute) */
-  const targetArticle = articleSelector.querySelector('href');
+  const targetArticle = articleSelector.querySelector('.post id');
   console.log ('Correct article:', targetArticle)
 
     /*[IN PROGRESS] add class 'active' to the correct article */
     
-  const clickedArticle = clickedElement.querySelector('.posts .post');
+  const clickedArticle = clickedElement.querySelector(articleSelector);
   const getAttribute = clickedArticle.getAttribute('href');
   clickedArticle.classList.add('active');
 
