@@ -40,7 +40,7 @@ const titleClickHandler = function(event){
 
     /*[IN PROGRESS] add class 'active' to the correct article */
     
-  const clickedArticle = clickedElement.querySelector(articleSelector);
+  const clickedArticle = document.querySelector(articleSelector);
   const getAttribute = clickedArticle.getAttribute('href');
   clickedArticle.classList.add('active');
 
