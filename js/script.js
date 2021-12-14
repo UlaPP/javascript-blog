@@ -37,12 +37,6 @@ const titleClickHandler = function(event){
   targetArticle.classList.add('active');
 
 }
-  
-const links = document.querySelectorAll('.titles a');
-console.log(links)  
-for(let link of links){
-  link.addEventListener('click', titleClickHandler);
-
 
   const optArticleSelector = '.post',
     optTitleSelector = '.post-title',
@@ -80,7 +74,12 @@ for(let link of links){
     }
     titleList.innerHTML = html;
     console.log(html)
-  }
 
+    const links = document.querySelectorAll('.titles a');
+    console.log(links)  
+    for(let link of links){
+      link.addEventListener('click', titleClickHandler);
+    }
+  }
   generateTitleLinks();
 }
