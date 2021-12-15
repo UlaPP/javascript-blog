@@ -46,10 +46,7 @@ const titleClickHandler = function(event){
 
     /* remove contents of titleList */
     const titleList = document.querySelector(optTitleListSelector);
-    consol.log ('titleList:', titleList);
-    function clearMessages(){
-      titleList.innerHTML = '';
-    }
+    titleList.innerHTML = '';
 
     /* for each article */
     const articles = document.querySelector(optArticleSelector);
@@ -82,4 +79,3 @@ const titleClickHandler = function(event){
     }
   }
   generateTitleLinks();
-}
