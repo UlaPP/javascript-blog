@@ -3,7 +3,7 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list';
-  optAuthorSelector = '.data-author';/*nowy selector nie wiem czy sensowny*/
+  optAuthorSelector = '.data-author';
   optPostAuthor = '.post-author';/*nowy selector nie wiem czy sensowny*/
 let html = '';
 
@@ -214,7 +214,7 @@ function generateAuthors() {
     const author = article.getAttribute('data-author'); 
     console.log('Target author is:', author);
       /* generate HTML of the link */
-      const authorlinkHTML = '<p class="post-author">by <a href="#author' + author'">'author'</a></p>’;
+      const authorlinkHTML = '<p class="post-author">by <a href="#author' + author'">"author'</a></p>’;
       console.log('created author link html:', authorlinkHTML);
       /* add generated code to html variable */
       author = author + authorlinkHTML
