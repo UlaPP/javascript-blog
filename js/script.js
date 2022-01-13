@@ -2,10 +2,9 @@
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
-  optAuthorSelector = '.data-author';
-  optPostAuthor = '.post-author';/*nowy selector nie wiem czy sensowny*/
-  optTagsListSelector = '.tags.list'
+  optArticleTagsSelector = '.post-tags .list',
+  optAuthorSelector = '.post-author',
+  optTagsListSelector = '.tags.list';
 let html = '';
 
 
@@ -88,6 +87,9 @@ function tagsParams (tags){
 }
 
 function generateTags() {
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
+  console.log('allTags:', allTags );
 
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector); // [article, aricle2, article]
@@ -121,6 +123,15 @@ function generateTags() {
 
       /* add generated code to html variable */
       html = html + linkHTML
+      /* [NEW] check if this link is NOT already in allTags 
+      Sprawdzamy, czy dokładnie taki link mamy już w tablicy allTags Zwróć uwagę, że w warunku użyliśmy wykrzyknika (!), czyli zastosowaliśmy negację. Dlatego warunek czytamy jako "jeśli allTags NIE MA klucza tag".*/
+      if(!allTags[tag]) {
+      /* [NEW] add tag to allTags object
+      Jeśli go nie mamy, dodajemy go do tej tablicy */
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
+      }
     }
 
     // html = '<li><a href="#tag-plant>plant</a></li><li><a href="#tag-plant>sport</a></li>"
@@ -128,7 +139,28 @@ function generateTags() {
   
     /* insert HTML of all the links into the tags wrapper */
     tagsList.innerHTML = html;
+
   }
+  /* [NEW] find list of tags in right column 
+  Na końcu funkcji znajdujemy listę tagów i dodajemy do niej wszystkie linki znajdujące się w tablicy*/
+  const tagList = document.querySelector(optTagsListSelector);
+
+  /* [NEW] create variable for all links HTML code */
+  /*let allTagsHTML = '';
+  const tagsParams = calculateTagsParams(allTags);
+  console.log('tagsParams:', tagsParams)
+
+  /* [NEW] START LOOP: for each tag in allTags: */
+  /*for(let tag in allTags){
+    /* [NEW] generate code of a link and add it to allTagsHTML */
+   /* allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+  }*/
+  /* [NEW] END LOOP: for each tag in allTags: */
+
+  /*[NEW] add HTML from allTagsHTML to tagList 
+  Jak widzisz, zamiast linka generujemy tylko nazwę tagu oraz liczbę jego wystąpień. Popraw ten fragment kodu tak, aby był generowany poprawny kod HTML linka.
+  */
+  /*tagList.innerHTML = allTagsHTML;*/
 
 }
 
@@ -200,32 +232,26 @@ addClickListenersToTags();
 
 function generateAuthors() {
 
-  /* find all authors */
-  const authors = document.querySelectorAll(optAuthorSelector); 
+  /* find all articles */
+  const articles = document.querySelectorAll(optArticleSelector); 
 
   /* START LOOP: for every article: */
-  for (let author of authors) {
-    console.log(author);
+  for (let article of articles) {
+    console.log(article);
 
-    /* find authors wrapper */
-    const authorsList = author.querySelector(optPostAuthorSelector);
-    tagsList.innerHTML = '';
-
-    /* make html variable with empty string */
-    let html = '';
+    /* find authors wrapper*/ 
+    const authorWrapper = article.querySelector(optAuthorSelector);
+    /*tagsList.innerHTML = '';*/
 
     /* get authors from data-author attribute */
     const author = article.getAttribute('data-author'); 
     console.log('Target author is:', author);
-      /* generate HTML of the link */
-      const authorlinkHTML = '<p class="post-author">by <a href="#author' + author'">"author'</a></p>’;
-      console.log('created author link html:', authorlinkHTML);
-      /* add generated code to html variable */
-      author = author + authorlinkHTML
-    }
+    /* generate HTML of the link */
+    const authorlinkHTML = 'by <a href="#author' + author + '">' + author + '</a>';
+    console.log('created author link html:', authorlinkHTML);
 
     /* insert HTML of all the authors into the authors wrapper */
-    authorsList.innerHTML = author;
+    authorWrapper.innerHTML = authorlinkHTML;
   }
 
 }
@@ -262,7 +288,7 @@ function authorClickHandler(event){
   /* END LOOP: for each active author link */
   }
   /* find all author links with "href" attribute equal to the "href" constant */
-  const authorRelatedLinks = document.querySelectorAll('a[href="#author' + author'"]');
+  const authorRelatedLinks = document.querySelectorAll('a[href="#author' + author +'"]');
   console.log('Author related links:', AuthorRelatedLinks);
 
   /* START LOOP: for each found author link */
@@ -276,7 +302,7 @@ function authorClickHandler(event){
 
   /* execute function "generateTitleLinks" with author selector as argument */
   // #3: filtrujemy listę artykułów wg autorów
-  generateTitleLinks('[data-author="' + author'"]');
+  generateTitleLinks('[data-author="' + author + '"]');
 }
 
 function addClickListenersToAuthors(){
@@ -294,67 +320,8 @@ function addClickListenersToAuthors(){
 }
 addClickListenersToAuthors();
 
-function generateTags(){
-  /* [NEW] create a new variable allTags with an empty object */
-  let allTags = {};
-  console.log = ('allTags:', allTags );
+  
 
-  /* find all articles */
 
-  /* START LOOP: for every article: */
-
-    /* find tags wrapper */
-
-    /* make html variable with empty string */
-
-    /* get tags from data-tags attribute
-    Dla każdego artykułu znajdujemy jego tagi  */
-
-    /* split tags into array */
-
-    /* START LOOP: for each tag */
-
-      /* generate HTML of the link 
-      Dla każdego z tych tagów jest generowany kod HTML linka */
-
-      /* add generated code to html variable */
-
-      /* [NEW] check if this link is NOT already in allTags 
-      Sprawdzamy, czy dokładnie taki link mamy już w tablicy allTags Zwróć uwagę, że w warunku użyliśmy wykrzyknika (!), czyli zastosowaliśmy negację. Dlatego warunek czytamy jako "jeśli allTags NIE MA klucza tag".*/
-      if(!allTags[tag]) {
-        /* [NEW] add tag to allTags object
-        Jeśli go nie mamy, dodajemy go do tej tablicy */
-        allTags[tag] = 1;
-      } else {
-        allTags[tag]++;
-      }
-
-    /* END LOOP: for each tag */
-
-    /* insert HTML of all the links into the tags wrapper */
-
-  /* END LOOP: for every article: */
-
-  /* [NEW] find list of tags in right column 
-  Na końcu funkcji znajdujemy listę tagów i dodajemy do niej wszystkie linki znajdujące się w tablicy*/
-  const tagList = document.querySelector(optTagsListSelector);
-
-  /* [NEW] create variable for all links HTML code */
-  let allTagsHTML = '';
-  const tagsParams = calculateTagsParams(allTags);
-  console.log('tagsParams:', tagsParams)
-
-  /* [NEW] START LOOP: for each tag in allTags: */
-  for(let tag in allTags){
-    /* [NEW] generate code of a link and add it to allTagsHTML */
-    allTagsHTML += tag + ' (' + allTags[tag] + ') ';
-  }
-  /* [NEW] END LOOP: for each tag in allTags: */
-
-  /*[NEW] add HTML from allTagsHTML to tagList 
-  Jak widzisz, zamiast linka generujemy tylko nazwę tagu oraz liczbę jego wystąpień. Popraw ten fragment kodu tak, aby był generowany poprawny kod HTML linka.
-  */
-  tagList.innerHTML = allTagsHTML;
-}
 
 
