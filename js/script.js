@@ -83,6 +83,9 @@ function generateTitleLinks(customSelector = ''){
 }
 
 generateTitleLinks();
+function tagsParams (tags){
+  
+}
 
 function generateTags() {
 
@@ -292,8 +295,9 @@ function addClickListenersToAuthors(){
 addClickListenersToAuthors();
 
 function generateTags(){
-  /* [NEW] create a new variable allTags with an empty array */
-  let allTags = [];
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
+  console.log = ('allTags:', allTags );
 
   /* find all articles */
 
@@ -303,20 +307,26 @@ function generateTags(){
 
     /* make html variable with empty string */
 
-    /* get tags from data-tags attribute */
+    /* get tags from data-tags attribute
+    Dla każdego artykułu znajdujemy jego tagi  */
 
     /* split tags into array */
 
     /* START LOOP: for each tag */
 
-      /* generate HTML of the link */
+      /* generate HTML of the link 
+      Dla każdego z tych tagów jest generowany kod HTML linka */
 
       /* add generated code to html variable */
 
-      /* [NEW] check if this link is NOT already in allTags */
-      if(allTags.indexOf(linkHTML) == -1){
-        /* [NEW] add generated code to allTags array */
-        allTags.push(linkHTML);
+      /* [NEW] check if this link is NOT already in allTags 
+      Sprawdzamy, czy dokładnie taki link mamy już w tablicy allTags Zwróć uwagę, że w warunku użyliśmy wykrzyknika (!), czyli zastosowaliśmy negację. Dlatego warunek czytamy jako "jeśli allTags NIE MA klucza tag".*/
+      if(!allTags[tag]) {
+        /* [NEW] add tag to allTags object
+        Jeśli go nie mamy, dodajemy go do tej tablicy */
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
       }
 
     /* END LOOP: for each tag */
@@ -325,11 +335,26 @@ function generateTags(){
 
   /* END LOOP: for every article: */
 
-  /* [NEW] find list of tags in right column */
+  /* [NEW] find list of tags in right column 
+  Na końcu funkcji znajdujemy listę tagów i dodajemy do niej wszystkie linki znajdujące się w tablicy*/
   const tagList = document.querySelector(optTagsListSelector);
 
-  /* [NEW] add html from allTags to tagList */
-  tagList.innerHTML = allTags.join(' ');
+  /* [NEW] create variable for all links HTML code */
+  let allTagsHTML = '';
+  const tagsParams = calculateTagsParams(allTags);
+  console.log('tagsParams:', tagsParams)
+
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let tag in allTags){
+    /* [NEW] generate code of a link and add it to allTagsHTML */
+    allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+  }
+  /* [NEW] END LOOP: for each tag in allTags: */
+
+  /*[NEW] add HTML from allTagsHTML to tagList 
+  Jak widzisz, zamiast linka generujemy tylko nazwę tagu oraz liczbę jego wystąpień. Popraw ten fragment kodu tak, aby był generowany poprawny kod HTML linka.
+  */
+  tagList.innerHTML = allTagsHTML;
 }
 
 
