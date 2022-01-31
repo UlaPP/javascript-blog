@@ -1,6 +1,8 @@
 'use strict';
 const templates = {
-  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML);
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML);
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML);
 }
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
@@ -150,7 +152,8 @@ function generateTags() {
       console.log('each tag of articleTagsArray :', articleTagsArray);
 
       /* generate HTML of the link */
-      const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
+      const linkHTMLData = {tag: tag};
+      const linkHTML = templates.tagLink(linkHTMLData);
       console.log('created link html:', linkHTML);
 
       /* add generated code to html variable */
@@ -278,7 +281,8 @@ function generateAuthors() {
     const author = article.getAttribute('data-author');
     console.log('Target author is:', author);
     /* generate HTML of the link */
-    const authorlinkHTML = 'by <a href="#author-' + author + '">' + author + '</a>';
+    const linkHTMLData = {author: author};
+    const linkHTML = templates.authorLink(linkHTMLData);
     console.log('created author link html:', authorlinkHTML);
 
     /* [NEW] check if this link is NOT already in allAuthors*/
