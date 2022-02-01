@@ -3,8 +3,8 @@ const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
   tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
   authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
-  //tagCloudLink: ;
- // authorsListLink: ;
+  //tagCloudLink: Handlebars.compile(document.querySelector('#templates-tagCloud-link').innerHTML),
+  //authorsListLink: Handlebars.compile(document.querySelector('#templates-authorsList-link').innerHTML),
 }
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
