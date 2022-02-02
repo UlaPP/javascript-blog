@@ -3,9 +3,9 @@ const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
   tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
   authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
-  //tagCloudLink: Handlebars.compile(document.querySelector('#templates-tagCloud-link').innerHTML),
-  //authorsListLink: Handlebars.compile(document.querySelector('#templates-authorsList-link').innerHTML),
-}
+  tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML),
+  authorsListLink: Handlebars.compile(document.querySelector('#template-authors-link').innerHTML)
+};
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
@@ -183,7 +183,7 @@ function generateTags() {
   const tagList = document.querySelector(optTagsListSelector);
 
   /* [NEW] create variable for all links HTML code */
-  const allTagsHTMLData = {tags: []};
+  const allTagsData = {tags: []};
 
   const tagsParams = calculateTagsParams(allTags);
   for(let tag in allTags){
@@ -291,7 +291,7 @@ function generateAuthors() {
     /* generate HTML of the link */
     const linkHTMLData = {author: author};
     const linkHTML = templates.authorLink(linkHTMLData);
-    console.log('created author link html:', authorlinkHTML);
+    console.log('created author link html:', authorLinkHTML);
 
     /* [NEW] check if this link is NOT already in allAuthors*/
     if(!allAuthors[author]) {
@@ -301,7 +301,7 @@ function generateAuthors() {
       allAuthors[author]++;
     }
     /* insert HTML of all the authors into the authors wrapper */
-    authorWrapper.innerHTML = authorlinkHTML;
+    authorWrapper.innerHTML = authorLinkHTML;
   }
 
   /* [NEW] find list of authors in right column */
