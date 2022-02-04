@@ -291,7 +291,6 @@ function generateAuthors() {
     /* generate HTML of the link */
     const linkHTMLData = {author: author};
     const linkHTML = templates.authorLink(linkHTMLData);
-    console.log('created author link html:', authorLinkHTML);
 
     /* [NEW] check if this link is NOT already in allAuthors*/
     if(!allAuthors[author]) {
@@ -301,14 +300,14 @@ function generateAuthors() {
       allAuthors[author]++;
     }
     /* insert HTML of all the authors into the authors wrapper */
-    authorWrapper.innerHTML = authorLinkHTML;
+    authorWrapper.innerHTML = linkHTML;
   }
 
   /* [NEW] find list of authors in right column */
   const authorsList = document.querySelector(optAuthorsListSelector);
 
   /* [NEW] create variable for all links HTML code */
-  const allAuthorsData = {author: []};
+  const allAuthorsData = {authorsList: []};
 
   for(let author in allAuthors){
     /* [NEW] generate code of a link and add it to allAuthorsHTML */
@@ -322,7 +321,7 @@ function generateAuthors() {
 
   /*[NEW] add HTML from allAuthorsHTML to authorList */
   authorsList.innerHTML = templates.authorsListLink(allAuthorsData);
-  console.log('allAuthorsData:', allAuthorsData)
+  console.log('allAuthorsData:', allAuthorsData);
 }
 
 generateAuthors();
